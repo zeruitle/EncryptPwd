@@ -13,4 +13,4 @@ The purpose of this extension is to have an easy way for chrome user to use a cl
 
 The project is going to be open source
 
-2016/04/07 Project starts
+2016/04/07 Project starts, learning and writing
