@@ -14,7 +14,8 @@
     {
       "matches": ["http://*/*"],
       "css": ["css/mystyles.css"],
-      "js": ["js/main.js"]
+      "js": ["js/main.js"],
+      "run_at": "document_end"
     }
   ],
   "permissions": [
