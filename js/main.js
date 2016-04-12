@@ -1,7 +1,15 @@
 /*
- *content_scripte set "run_at": "document_end"
- *no need to wait for DOM again
+ *@file content_script
+ *manifest: "run_at" set "document_end"
+ *This script is injected immediately after the DOM is complete, but before subresources like images and frames have loaded.
+ *If the login page is implemented using iframe etc., potentially this extension rise bug
  */
+
+/**
+ * @constructor
+ * @interface
+ */
+function InputDOMInterface(){}
 
 var inputs = document.getElementsByTagName('input');
 var realpwd = [];
@@ -39,7 +47,7 @@ for(var i = 0; i < realpwd.length; i++){
 //bind masterpwd field keyup action
 function bindKeyup(i){
     return function(){
-        //TODO:: validate input
+        //TODO:: validate input, and security
         
         //TODO:: encrypt password
         
