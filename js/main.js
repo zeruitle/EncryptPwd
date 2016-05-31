@@ -9,7 +9,12 @@
  * @constructor
  * @interface
  */
-function InputDOMInterface(){}
+//function InputDOMInterface(){}
+
+/*
+ *@type
+ */
+//InputDOMInterface.prototype.DOM = [];
 
 var inputs = document.getElementsByTagName('input');
 var realpwd = [];
@@ -33,6 +38,8 @@ for(var i = 0; i < realpwd.length; i++){
     var div = document.createElement('div');
     div.id = 'masterdiv'+i;
     div.innerHTML = elements;
+    //get parent form
+    var pform = realpwd[i].form;
     
     //insert masterpwd input field
     realpwd[i].parentNode.insertBefore(div,realpwd[i]);
@@ -42,17 +49,34 @@ for(var i = 0; i < realpwd.length; i++){
     realpwd[i].style.display = "none";
     //listen when user input masterpwd
     masterpwd[i].addEventListener("keyup", bindKeyup(i));
+    //listen when user submit, destroy masterpwd
+    pform.addEventListener("submit",removeMaster(i));
 }
 
 //bind masterpwd field keyup action
 function bindKeyup(i){
     return function(){
-        //TODO:: validate input, and security
-        
+        //trim input, no point to validate
+        pwdTrim = masterpwd[i].value.trim();
         //TODO:: encrypt password
-        
+        pwdEncrypt = encryption(pwdTrim);
         //TODO:: set realpwd.value as returned encrypted password
-        realpwd[i].value = masterpwd[i].value;
+        realpwd[i].value = pwdEncrypt;
         console.log(realpwd[i].value);
     }
+}
+
+//remove msterpwd when user submit
+function removeMaster(i){
+    return function(e){
+        //e.preventDefault();
+        //fine Im using removeChild for compatibility
+        masterpwd[i].parentElement.removeChild(masterpwd[i]);
+        realpwd[i].style.display = "initial";
+    }
+}
+
+//encrypt password here
+function encryption(pwd){
+    
 }
