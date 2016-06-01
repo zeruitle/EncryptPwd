@@ -34,7 +34,7 @@ for(var i = 0; i < inputs.length; i++) {
 //insert encryppwd input field after get all realpwd input field
 for(var i = 0; i < realpwd.length; i++){
     //prepare the master input field
-    var elements = "<input name='masterpwd"+i+"' id='masterpwd"+i+"' type='password' placeholder='EncryptPwd On'>";
+    var elements = "<input name='masterpwd"+i+"' id='masterpwd"+i+"' type='password' placeholder='EncryptPwd On' required>";
     var div = document.createElement('div');
     div.id = 'masterdiv'+i;
     div.innerHTML = elements;
@@ -58,11 +58,14 @@ function bindKeyup(i){
     return function(){
         //trim input, no point to validate
         pwdTrim = masterpwd[i].value.trim();
-        //encrypt password
-        pwdEncrypt = encryption(pwdTrim);
-        //set realpwd.value as returned encrypted password
-        realpwd[i].value = pwdEncrypt;
-        console.log(realpwd[i].value);
+        //make sure not accept empty input
+        if(pwdTrim){
+            //encrypt password
+            pwdEncrypt = encryption(pwdTrim);
+            //set realpwd.value as returned encrypted password
+            realpwd[i].value = pwdEncrypt;
+            console.log(realpwd[i].value);
+        }
     }
 }
 
@@ -89,5 +92,6 @@ function removeMaster(i){
  *var RMD160 = new Hashes.RMD160
  */
 function encryption(pwd){
-    
+    var MD5 = new Hashes.SHA256().hex(pwd)
+    return MD5;
 }

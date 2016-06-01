@@ -15,7 +15,8 @@
     {
       "matches": ["<all_urls>"],
       "css": ["css/mystyles.css"],
-      "js": ["js/main.js"],
+      "js": ["js/main.js",
+             "jshash/hashes.min.js"],
       "run_at": "document_end"
     }
   ],
