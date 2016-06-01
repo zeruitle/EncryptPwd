@@ -58,9 +58,9 @@ function bindKeyup(i){
     return function(){
         //trim input, no point to validate
         pwdTrim = masterpwd[i].value.trim();
-        //TODO:: encrypt password
+        //encrypt password
         pwdEncrypt = encryption(pwdTrim);
-        //TODO:: set realpwd.value as returned encrypted password
+        //set realpwd.value as returned encrypted password
         realpwd[i].value = pwdEncrypt;
         console.log(realpwd[i].value);
     }
@@ -76,7 +76,18 @@ function removeMaster(i){
     }
 }
 
-//encrypt password here
+/*encrypt password here
+ *new MD5 instance
+ *var MD5 = new Hashes.MD5
+ *new SHA1 instance
+ *var SHA1 = new Hashes.SHA1
+ *new SHA256 instance
+ *var SHA256 =  new Hashes.SHA256
+ *new SHA512 instace
+ *var SHA512 = new Hashes.SHA512
+ *new RIPEMD-160 instace
+ *var RMD160 = new Hashes.RMD160
+ */
 function encryption(pwd){
     
 }
