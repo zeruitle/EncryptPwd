@@ -24,17 +24,8 @@ var masterpwd = [];
 for(var i = 0; i < inputs.length; i++) {
     //find if there's an password input field
     if(inputs[i].type.toLowerCase() == 'password') {
-        //get the password input id
-        if(inputs[i].id) {
-            //get password input element
-            realpwd.push(document.getElementById(inputs[i].id));
-        } else if(inputs[i].name) {
-            //TODO:: this is not right
-            //if input field dont have id
-            realpwd.push(document.getElementsByName(inputs[i].name));
-        } else {
-            alert("No way input field dont have id and name");
-        }
+        //get password input element
+        realpwd.push(inputs[i]);
     }
 }
 
@@ -46,8 +37,7 @@ for(var i = 0; i < realpwd.length; i++){
     div.id = 'masterdiv'+i;
     div.innerHTML = elements;
     //get parent form
-    //TODO:: need verify
-    var pform;console.log(realpwd[i].name);
+    var pform;
     try {
         //the form has id, return form object
         pform = realpwd[i].form;
@@ -87,7 +77,7 @@ function bindKeyup(i){
 //remove msterpwd when user submit
 function removeMaster(i){
     return function(e){
-        //e.preventDefault();
+        e.preventDefault();
         //fine Im using removeChild for compatibility
         masterpwd[i].parentElement.removeChild(masterpwd[i]);
         realpwd[i].style.display = "initial";
