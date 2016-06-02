@@ -25,9 +25,16 @@ for(var i = 0; i < inputs.length; i++) {
     //find if there's an password input field
     if(inputs[i].type.toLowerCase() == 'password') {
         //get the password input id
-        var id = inputs[i].id;
-        //get password input element
-        realpwd.push(document.getElementById(id));
+        if(inputs[i].id) {
+            //get password input element
+            realpwd.push(document.getElementById(inputs[i].id));
+        } else if(inputs[i].name) {
+            //TODO:: this is not right
+            //if input field dont have id
+            realpwd.push(document.getElementsByName(inputs[i].name));
+        } else {
+            alert("No way input field dont have id and name");
+        }
     }
 }
 
@@ -39,7 +46,15 @@ for(var i = 0; i < realpwd.length; i++){
     div.id = 'masterdiv'+i;
     div.innerHTML = elements;
     //get parent form
-    var pform = realpwd[i].form;
+    //TODO:: need verify
+    var pform;console.log(realpwd[i].name);
+    try {
+        //the form has id, return form object
+        pform = realpwd[i].form;
+    } catch(e) {
+        //the form might not have id
+        pform = realpwd[i].closest('form');
+    }
     
     //insert masterpwd input field
     realpwd[i].parentNode.insertBefore(div,realpwd[i]);
